@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/buildspeakers/template-basic-gulp-sass/issues"
   },
-  "homepage": "https://github.com/buildspeakers/template-basic-gulp-sass#readme"
+  "homepage": "https://github.com/buildspeakers/template-basic-gulp-sass#readme",
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4"
+  }
 }
