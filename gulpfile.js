@@ -18,6 +18,18 @@ gulp.task('compileSass', () => {
         .pipe(gulp.dest('dist/css'));
 });
 
+// Concatinate JS
+gulp.task('concatJs', () => {
+  return gulp.src([
+    // libs eg.
+    // 'node_modules/jQuery/dist/jquery.js',
+    // My js
+    'src/js/app.js'
+  ])
+  .pipe(concat('app.js'))
+  .pipe(gulp.dest('dist/js'))
+});
+
 // reload
 gulp.task('reload', () => {
     browserSync.reload();
@@ -31,11 +43,10 @@ gulp.task('sassReload', ['compileSass'], (done) => {
 })
 
 // watch task
-gulp.task('watchFiles', ['compileSass'], (done) => {
-    // compile and reload when scss file changes
-    gulp.watch(['src/scss/**/*.scss'], ['sassReload']);
-    // reload when html file changes
-    gulp.watch(['dist/*.html'], ['reload']);
+gulp.task('watchFiles', () => {
+    gulp.watch(['src/scss/**/*.scss'], ['sassReload']); // watch sass
+    gulp.watch(['src/js/*.js'], ['concatJs']); // watch js
+    gulp.watch(['dist/*.html'], ['reload']); // watch html
 })
 
 // start browser-sync server
@@ -47,7 +58,7 @@ gulp.task('browserSync', () => {
 })
 
 // default task
-gulp.task('default', () => {
+gulp.task('default', ['compileSass', 'concatJs'], (done) => {
     gulp.start('watchFiles');
     gulp.start('browserSync');
 });
